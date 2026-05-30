@@ -87,6 +87,7 @@ Claude then acts as a specialist in that role — with the matching focus and to
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, explanations for the community |
 | `$Review` | PR Reviewer | Full review against the official openHAB checklist |
+| `$Release` | Release Preparer | `spotless:apply` → `i18n:generate-default-translations` → `clean install` |
 
 > `$Review` only on explicit request — it runs through the complete 44-item checklist.
 
@@ -107,6 +108,7 @@ openhab-claude/
     ├── concept/skill.md
     ├── dev/skill.md
     ├── qa/skill.md
+    ├── release/skill.md
     ├── review/skill.md
     └── writer/skill.md
 ```
