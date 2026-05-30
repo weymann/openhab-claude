@@ -1,7 +1,18 @@
-# openHAB Claude – Vibe Coding Setup
+# openHAB Claude – AI-Powered Binding Development
 
-This repository controls how Claude works when developing an openHAB binding.
-It defines roles, rules, and checklists — all in one place.
+> Vibe Coding for openHAB — build production-ready bindings faster with a structured AI development team at your side.
+
+Developing an openHAB binding requires deep knowledge of Java, OSGi, openHAB APIs, coding guidelines, and PR standards.
+This repository turns Claude AI into a **complete, opinionated development team** — ready to use, zero configuration.
+
+✅ **Provides a complete AI development team** — Architect, Developer, QA, Writer, and PR Reviewer roles, each with a distinct focus and expertise
+✅ **Enforces official openHAB coding guidelines** — automatically, on every response
+✅ **Enforces the official PR review checklist** — 44-point review before every pull request
+✅ **Language-aware** — chat in any language, all project files stay in English
+✅ **Decision tracking built-in** — every architectural decision recorded as an ADR with optional Mermaid diagrams
+✅ **Dependency governance** — new libraries require `$Architect` approval, automatic license analysis via Maven, human-in-the-loop confirmation before any `pom.xml` change
+✅ **Extensible by design** — add your own coding rules alongside the official guidelines
+✅ **Works with Claude.ai Projects, Claude Code, and Open WebUI**
 
 ---
 
@@ -88,7 +99,7 @@ openhab-claude/
 ├── README.md                ← This file
 ├── CLAUDE.md                ← Global rules for all roles (language, decisions, headers)
 ├── rules/
-│   ├── java-coding-rules.md            ← Custom requirements (PMD, NonNull, etc.)
+│   ├── java-coding-rules.md            ← Your own rules, extending the official guidelines
 │   ├── openhab-coding-guidelines.md    ← Official openHAB guidelines
 │   └── openhab-review-checklist.md     ← Official PR checklist (44 items)
 └── skills/
@@ -135,6 +146,13 @@ You don't need to trigger this manually — Claude creates the ADR as soon as a 
 ```
 
 You can switch or combine roles at any time. No rigid process — just a clear orientation.
+
+---
+
+## Compatibility
+
+Works with **Claude.ai Projects**, **Claude Code**, and **Open WebUI**.
+For Open WebUI: upload the `rules/` files as a Knowledge collection and paste the contents of `CLAUDE.md` as the system prompt.
 
 ---
 

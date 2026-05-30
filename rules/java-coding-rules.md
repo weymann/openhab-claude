@@ -1,4 +1,8 @@
-# Java Coding Rules (PMD / openHAB compliance)
+# Custom Java Coding Rules
+
+> This file extends the official openHAB coding guidelines with project-specific rules.
+> Add your own rules here whenever you find patterns that Claude should always follow in your codebase.
+> The three rules below serve as examples.
 
 ### Null checks — NEVER throw NullPointerException explicitly
 Always use `IllegalArgumentException` with a descriptive message when validating null arguments:

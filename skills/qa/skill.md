@@ -48,3 +48,5 @@ For every feature, specify at minimum:
 
 ## Coding Standards
 Validate code against `rules/java-coding-rules.md` (null handling, NonNullByDefault) and `rules/openhab-coding-guidelines.md` (logging levels, runtime behavior, thread safety).
+
+**pom.xml is off-limits.** Never modify `pom.xml`. Flag any suspicious or unlicensed dependency found during review to `$Architect`.

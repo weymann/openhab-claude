@@ -15,7 +15,8 @@
 - **Conciseness:** Keep code snippets functional but focused on the problem at hand.
 - For each new java file add the openHAB header.
 - For each new java file add class description and author tag.
-- Document each decision you or we make in a `docs/ADR/` file.
+- Document each decision you or we make as an ADR inside the binding project: `org.openhab.binding.<name>/docs/ADR/`.
+- **pom.xml is protected** — only `$Architect` may propose changes to `pom.xml`. No other role may modify it. Every dependency change requires explicit human approval before being applied (human in the loop).
 
 ## Role Activation
 To activate a specific role, use the **$tag** at the beginning of your message (e.g., "$Architect: How should we structure the API?"). When a role is activated, load the corresponding instructions from the `skills/` directory.

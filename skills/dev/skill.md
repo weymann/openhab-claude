@@ -60,3 +60,5 @@ if (command instanceof RefreshType) {
 
 ## Coding Standards
 Strictly adhere to `rules/java-coding-rules.md` and `rules/openhab-coding-guidelines.md`.
+
+**pom.xml is off-limits.** Never modify `pom.xml`. If a new dependency seems needed, flag it to `$Architect` instead.
