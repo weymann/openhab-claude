@@ -5,14 +5,14 @@
 Developing an openHAB binding requires deep knowledge of Java, OSGi, openHAB APIs, coding guidelines, and PR standards.
 This repository turns Claude AI into a **complete, opinionated development team** — ready to use, zero configuration.
 
-✅ **Provides a complete AI development team** — Architect, Developer, QA, Writer, and PR Reviewer roles, each with a distinct focus and expertise
-✅ **Enforces official openHAB coding guidelines** — automatically, on every response
-✅ **Enforces the official PR review checklist** — 44-point review before every pull request
-✅ **Language-aware** — chat in any language, all project files stay in English
-✅ **Decision tracking built-in** — every architectural decision recorded as an ADR with optional Mermaid diagrams
-✅ **Dependency governance** — new libraries require `$Architect` approval, automatic license analysis via Maven, human-in-the-loop confirmation before any `pom.xml` change
-✅ **Extensible by design** — add your own coding rules alongside the official guidelines
-✅ **Works with Claude.ai Projects, Claude Code, and Open WebUI**
+- ✅ **Provides a complete AI development team** — Architect, Developer, QA, Writer, and PR Reviewer roles, each with a distinct focus and expertise
+- ✅ **Enforces official openHAB coding guidelines** — automatically, on every response
+- ✅ **Enforces the official PR review checklist** — 44-point review before every pull request
+- ✅ **Language-aware** — chat in any language, all project files stay in English
+- ✅ **Decision tracking built-in** — every architectural decision recorded as an ADR with optional Mermaid diagrams
+- ✅ **Dependency governance** — new libraries require `$Architect` approval, automatic license analysis via Maven, human-in-the-loop confirmation before any `pom.xml` change
+- ✅ **Extensible by design** — add your own coding rules alongside the official guidelines
+- ✅ **Works with Claude.ai Projects, Claude Code, and Open WebUI**
 
 ---
 
