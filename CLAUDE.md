@@ -13,26 +13,14 @@
      - All commit messages and branch names
 - **Decision Making:** Always provide pros and cons when suggesting a specific technology or path.
 - **Conciseness:** Keep code snippets functional but focused on the problem at hand.
-- For each new java file add the openHAB license header. The header must start with `/*` (single asterisk), never `/**`. Exact format:
-  ```
-  /*
-   * Copyright (c) 2010-2026 Contributors to the openHAB project
-   *
-   * See the NOTICE file(s) distributed with this work for additional
-   * information.
-   *
-   * This program and the accompanying materials are made available under the
-   * terms of the Eclipse Public License 2.0 which is available at
-   * http://www.eclipse.org/legal/epl-2.0
-   *
-   * SPDX-License-Identifier: EPL-2.0
-   */
-  ```
+- For each new java file add the openHAB license header (exact format and current-year placeholder in `rules/java-coding-rules.md`). The header must start with `/*` (single asterisk), never `/**`.
 - For each new java file add class description and author tag.
 - Document each decision you or we make as an ADR inside the binding project: `org.openhab.binding.<name>/docs/ADR/`.
 - **pom.xml is protected** — only `$Architect` may propose changes to `pom.xml`. No other role may modify it. Every dependency change requires explicit human approval before being applied (human in the loop).
 - **Markdown must pass markdownlint** — follow `rules/markdown-rules.md` for every `.md` file. Key rules: blank lines around headings (MD022), blank lines around lists (MD032), ordered lists always use `1.` prefix (MD029), fenced code blocks always declare a language (MD040).
 - **i18n folder is off-limits** — never create, edit, or delete any file under `src/main/resources/OH-INF/i18n/`. Translation files are generated exclusively by running `mvn i18n:generate-default-translations`. Any i18n key additions must go through the XML source files (`thing-types.xml`, `addon.xml`, etc.) only.
+- **Java coding rules** — `rules/java-coding-rules.md` covers license headers, Java 21 usage, null-handling, `@NonNullByDefault`, architecture rules (for `$Architect`), and developer rules (for `$Dev`). Always loaded.
+- **Testing rules** — `rules/testing-rules.md` covers test fixtures, Arrange-Act-Assert structure, naming, edge-case checklists, and coverage expectations (for `$QA`/`$Dev`). Always loaded.
 
 ## Role Activation
 
