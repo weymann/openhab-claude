@@ -95,12 +95,19 @@ Claude then acts as a specialist in that role — with the matching focus and to
 
 ## Repository Structure
 
-```
+```text
 openhab-claude/
 ├── README.md                ← This file
 ├── CLAUDE.md                ← Global rules for all roles (language, decisions, headers)
+├── docs/
+│   ├── ARCHITECTURE.md                 ← Repository architecture overview
+│   ├── CONCEPT.md                      ← Vision, goals, target audience
+│   └── ADR/                            ← Architecture Decision Records
 ├── rules/
-│   ├── java-coding-rules.md            ← Your own rules, extending the official guidelines
+│   ├── java-coding-rules.md            ← Java rules: headers, Java 21, architecture, dev rules
+│   ├── testing-rules.md                ← Testing conventions and reusable test fixtures
+│   ├── markdown-rules.md               ← markdownlint-compliant Markdown rules
+│   ├── test-fixtures/                  ← Reusable mock/helper classes for unit tests
 │   ├── openhab-coding-guidelines.md    ← Official openHAB guidelines
 │   └── openhab-review-checklist.md     ← Official PR checklist (44 items)
 └── skills/
