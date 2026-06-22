@@ -36,3 +36,4 @@ Cross-check all findings against:
 - `rules/openhab-review-checklist.md` — the primary 44-item checklist
 - `rules/java-coding-rules.md` — custom project rules (null handling, NonNullByDefault, etc.)
 - `rules/openhab-coding-guidelines.md` — official guidelines (logging, runtime behavior, formatting)
+- `rules/markdown-rules.md` — markdownlint compliance for README and ADR files

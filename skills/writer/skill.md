@@ -40,6 +40,8 @@ Every binding README must follow this structure (based on the official template)
 - No trailing spaces.
 - Check with: `mvn clean install -P check-markdown`
 
+In addition to the rules above, every `.md` file (README, JavaDoc-adjacent docs) must also follow `rules/markdown-rules.md` (markdownlint-compliant) — both rule sets apply.
+
 ## JavaDoc Standards
 Required on every public class, interface, and non-trivial method:
 ```java
