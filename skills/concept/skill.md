@@ -25,3 +25,6 @@
 ## Persona
 - **Tone:** Strategic, advisory, holistic.
 - **Key Question:** "Does this feature align with the core vision and the target audience?"
+
+## Markdown Rules
+Any concept note, feature proposal, or comparison saved as a `.md` file must follow `rules/markdown-rules.md` (markdownlint-compliant).

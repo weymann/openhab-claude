@@ -265,3 +265,69 @@ try {
 ### `@Nullable` / `Optional` consistency
 
 With `@NonNullByDefault` active, use `@Nullable` for fields/parameters/return types that may legitimately be absent (per openHAB convention). Use `Optional<T>` only for method return types where "absence" is a normal, expected outcome (not for fields or parameters). Do not mix both styles for the same kind of value within a class.
+
+---
+
+### Never catch `Throwable`
+
+Catch the specific exception type(s) you can meaningfully handle (e.g. `IOException`, `JsonSyntaxException`). Catching `Throwable` (or `Error`) also swallows `OutOfMemoryError`, `StackOverflowError`, etc., which must never be silently handled.
+
+```java
+// WRONG
+try {
+    doSomething();
+} catch (Throwable t) {
+    logger.warn("Failed: {}", t.getMessage());
+}
+
+// CORRECT
+try {
+    doSomething();
+} catch (IOException | JsonSyntaxException e) {
+    logger.warn("Failed: {}", e.getMessage());
+}
+```
+
+If multiple unrelated exception types genuinely need the same handling, catch them explicitly with a multi-catch (`A | B`) rather than widening to `Exception`/`Throwable`.
+
+---
+
+### No `System.out` / `System.err` — use the logger
+
+Never use `System.out.println(...)` or `System.err.println(...)`, including in tests. Use the SLF4J `logger` (production code) or, for test diagnostics, assertion messages / test logger — not console output.
+
+```java
+// WRONG
+System.out.println("Result: " + result);
+
+// CORRECT
+logger.debug("Result: {}", result);
+```
+
+---
+
+### Use `isEmpty()` instead of `size() == 0`
+
+Replace `size() == 0`, `size() != 0`, `size() > 0`, and `size() < 1` with `isEmpty()` / `!isEmpty()`:
+
+```java
+// WRONG
+if (list.size() == 0) { ... }
+if (list.size() > 0) { ... }
+
+// CORRECT
+if (list.isEmpty()) { ... }
+if (!list.isEmpty()) { ... }
+```
+
+---
+
+### `@NonNullByDefault` applies to every type, including enums and interfaces
+
+The `@NonNullByDefault` requirement above is not limited to top-level classes — it must also be added to **every enum, interface, record, and inner/nested type** (e.g. domain enums, repository/service interfaces, exception classes). When creating any new type, check it carries the annotation before considering the file done.
+
+---
+
+### Commons Math: only use supported `org.apache.commons.math3.optim.*` linear-optimization packages
+
+When using Apache Commons Math's Simplex solver for linear programming, import only from the `org.apache.commons.math3.optim` / `org.apache.commons.math3.optim.linear` packages as approved in the project's dependency. If static analysis flags these imports as "should not be used", recheck against the `pom.xml`-approved Commons Math version/API and raise with `$Architect` — resolving it may require a dependency change (pom.xml is protected, human approval required).
