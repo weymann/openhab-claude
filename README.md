@@ -12,6 +12,7 @@ This repository turns Claude AI into a **complete, opinionated development team*
 - ✅ **Decision tracking built-in** — every architectural decision recorded as an ADR with optional Mermaid diagrams
 - ✅ **Dependency governance** — new libraries require `$Architect` approval, automatic license analysis via Maven, human-in-the-loop confirmation before any `pom.xml` change
 - ✅ **Extensible by design** — add your own coding rules alongside the official guidelines
+- ✅ **Optional automated pipeline** — `/pipeline` (Claude Code only) runs Concept → Architect → Dev → QA → Writer → Review → Release end to end, with the same governance gates enforced by hooks
 - ✅ **Works with Claude.ai Projects, Claude Code, and Open WebUI**
 
 ---
@@ -155,6 +156,47 @@ You don't need to trigger this manually — Claude creates the ADR as soon as a 
 ```
 
 You can switch or combine roles at any time. No rigid process — just a clear orientation.
+
+---
+
+## Automated Pipeline (Claude Code Only)
+
+Beyond manually tagging roles, this repository also ships a Claude Code subagent pipeline that runs the full workflow above automatically. Hooks keep the `pom.xml` and i18n protections in place no matter which role is acting, so automation does not bypass the governance rules in `CLAUDE.md`.
+
+### Setup
+
+Claude Code loads `.claude/agents`, `.claude/commands`, and `.claude/settings.json` relative to the project root it is started in. Since this repository is the rules framework and not a binding project itself, copy or symlink its `.claude/` folder into your actual binding project root before using it:
+
+```bash
+cp -r openhab-claude/.claude your-binding-project/.claude
+```
+
+Or, to keep it in sync with future updates to this repository:
+
+```bash
+ln -s ../openhab-claude/.claude your-binding-project/.claude
+```
+
+### Usage
+
+Run the full pipeline for one feature from Claude Code:
+
+```text
+/pipeline Add support for polling battery level every 5 minutes
+```
+
+Claude Code invokes, in order: `concept`, `architect`, `dev`, `qa`, `writer`, `review`, `release`. Each subagent hands its output to the next one, so you don't need to copy context between stages yourself.
+
+### Automatic safeguards
+
+- QA failures trigger one automatic correction pass back to `dev`, then a re-test. Two consecutive failures stop the pipeline and report to you instead of looping.
+- Review-checklist blockers follow the same one-retry pattern before stopping.
+- Any `pom.xml` change pauses the pipeline and shows you the dependency proposal for approval, mirroring the manual `$Architect` process. A hook additionally enforces this at the tool level, regardless of which stage triggers the edit.
+- Any write under `src/main/resources/OH-INF/i18n/` is blocked outright by the same hook. Only `mvn i18n:generate-default-translations`, run automatically during the `release` stage, may touch that folder.
+
+### Manual roles still work
+
+`/pipeline` is additive, not a replacement. You can still tag individual roles (`$Dev: ...`, `$QA: ...`) for one-off work without running the whole pipeline — see [The Roles](#the-roles) above.
 
 ---
 
