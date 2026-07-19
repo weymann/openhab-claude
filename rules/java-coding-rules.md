@@ -176,6 +176,12 @@ Avoid generic catch-all packages such as `internal/models`, `internal/utils`, or
 
 ---
 
+### Persistent state — use `StorageService`, not custom persistence
+
+Any state that must survive across the Thing/binding lifecycle (restarts, OSGi bundle reloads) is persisted via [`org.openhab.core.storage.StorageService`](https://www.openhab.org/javadoc/latest/org/openhab/core/storage/package-summary) — never custom file I/O, in-memory-only maps, or ad-hoc serialization. Inject `StorageService` via the constructor (per the dependency-injection rule above), typically into the handler factory, which passes it on to the handler. Decide the storage key namespace (typically `thing.getUID().toString()`) as part of the handler design, and document the decision as an ADR when introducing `StorageService` usage to a binding for the first time.
+
+---
+
 ### Document the error escalation strategy
 
 Each binding documents, as an ADR, how errors propagate:
@@ -331,3 +337,32 @@ The `@NonNullByDefault` requirement above is not limited to top-level classes �
 ### Commons Math: only use supported `org.apache.commons.math3.optim.*` linear-optimization packages
 
 When using Apache Commons Math's Simplex solver for linear programming, import only from the `org.apache.commons.math3.optim` / `org.apache.commons.math3.optim.linear` packages as approved in the project's dependency. If static analysis flags these imports as "should not be used", recheck against the `pom.xml`-approved Commons Math version/API and raise with `$Architect` — resolving it may require a dependency change (pom.xml is protected, human approval required).
+
+---
+
+### `StorageService` — lifecycle-bound persistence pattern
+
+Obtain the `Storage<T>` instance in `initialize()` from the injected `StorageService`, and remove the entry in `handleRemoval()` — not in `dispose()`. `dispose()` runs on every disable/update/restart cycle; `handleRemoval()` only runs when the Thing is actually deleted, so that is the only place stored data should be discarded.
+
+```java
+private @Nullable Storage<MyState> storage;
+
+@Override
+public void initialize() {
+    storage = storageService.getStorage(thing.getUID().toString(), MyState.class.getClassLoader());
+    // ... read/restore state from storage as needed
+    updateStatus(ThingStatus.UNKNOWN);
+    scheduler.execute(this::connect);
+}
+
+@Override
+public void handleRemoval() {
+    Storage<MyState> storage = this.storage;
+    if (storage != null) {
+        storage.remove(thing.getUID().toString());
+    }
+    updateStatus(ThingStatus.REMOVED);
+}
+```
+
+Do not remove the storage entry in `dispose()` — doing so would wipe persisted state on every binding restart or Thing update, not just on deletion.
