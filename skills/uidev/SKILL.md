@@ -186,7 +186,7 @@ component boundary.
 
 ## SVG Donut Ring — Sol App Geometry
 
-```
+```text
 viewBox: 0 0 260 260
 Centre: cx=130, cy=130   Ring radius: 100   Stroke-width: 28
 
@@ -225,7 +225,7 @@ Accuracy: ±1 day — sufficient for UI display.
 
 Moon dot via two SVG paths (no ternary needed):
 
-```
+```text
 1. Dark base circle:
    <circle cx="X" cy="Y" r="12" fill="#0a1520"/>
 

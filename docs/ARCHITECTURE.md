@@ -8,7 +8,7 @@ This repository is not a binding itself — it is an **AI development environmen
 
 ## Repository Structure
 
-```
+```text
 openhab-claude/
 ├── CLAUDE.md                     ← Global rules enforced across all roles
 ├── README.md                     ← Setup guide and role overview
@@ -65,23 +65,28 @@ Roles can be combined in a single session. There is no enforced sequencing — t
 ## Governance Rules (enforced via CLAUDE.md)
 
 ### Language
+
 - Chat language mirrors the user.
 - All project artifacts (code, comments, docs, XML, logs) are **English-only**.
 
 ### pom.xml Protection
+
 - Only `$Architect` may propose `pom.xml` changes.
 - Every dependency change requires explicit human approval before being applied.
 
 ### i18n Protection
+
 - Files under `src/main/resources/OH-INF/i18n/` are **never created or edited manually**.
 - Translation properties are generated exclusively via `mvn i18n:generate-default-translations`.
 - i18n keys are defined in XML source files (`thing-types.xml`, `addon.xml`) only.
 
 ### Decision Tracking
+
 - Every architectural or design decision is recorded as an ADR in `docs/ADR/` inside the binding project.
 - ADR numbering is sequential. Template: `docs/ADR/000-template.md`.
 
 ### Java File Standards
+
 - Every new Java file includes the openHAB license header.
 - Every new Java file includes a class-level JavaDoc with `@author`.
 
@@ -101,4 +106,4 @@ Roles can be combined in a single session. There is no enforced sequencing — t
 
 | # | Title | Status |
 |---|-------|--------|
-| — | *(no ADRs yet — created per binding project, not here)* | — |
+| — | _(no ADRs yet — created per binding project, not here)_ | — |

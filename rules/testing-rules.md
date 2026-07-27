@@ -5,7 +5,7 @@
 
 ---
 
-### Test fixtures — reuse reference mocks from `rules/test-fixtures/`
+## Test fixtures — reuse reference mocks from `rules/test-fixtures/`
 
 Reusable test helper classes (mocks, fakes, base test classes) live in `rules/test-fixtures/`.
 When writing unit tests (`$Dev`, `$QA`), check this folder first before writing a new mock from scratch.
@@ -23,7 +23,7 @@ When adding a new fixture to this folder:
 
 ---
 
-### JSON HTTP response fixtures — `src/test/resources/`
+## JSON HTTP response fixtures — `src/test/resources/`
 
 Canned JSON HTTP responses used in unit tests live under `src/test/resources/` of the target binding (not `src/main/resources/`).
 Load them with `FileReader.readFileInString(...)` and feed the result into the JSON deserializer (e.g. Gson) under test.
@@ -32,13 +32,13 @@ Naming convention: `<endpoint-or-scenario>.json` (e.g. `current-weather-response
 
 ---
 
-### Arrange-Act-Assert structure
+## Arrange-Act-Assert structure
 
 Every test method follows the Arrange-Act-Assert pattern, with the three phases visually separated by blank lines (or comments for longer tests):
 
 ```java
 @Test
-void whenApiReturnsEmptyList_thenThingGoesOffline() {
+void whenApiReturnsEmptyListThenThingGoesOffline() {
     // Arrange
     CallbackMock callback = new CallbackMock();
     ApiClient client = mock(ApiClient.class);
@@ -54,15 +54,18 @@ void whenApiReturnsEmptyList_thenThingGoesOffline() {
 
 ---
 
-### One behavior per test, descriptive names
+## One behavior per test, descriptive names
 
-Each test method verifies exactly one behavior. Test names describe the expected outcome, not the implementation:
+Each test method verifies exactly one behavior. Test names describe the expected outcome, not the implementation, using a `whenXThenY` camelCase name — no underscore. Checkstyle's `MethodNameCheck` (`^[a-z][a-zA-Z0-9]*$`) rejects underscores in identifiers, including test method names; capitalization alone (`when...Then...`) keeps the name readable without one:
 
 ```java
 // CORRECT
+void whenApiReturnsEmptyListThenThingGoesOffline()
+void whenTemperatureChannelLinkedThenStateIsUpdatedInCelsius()
+void whenHttpClientThrowsTimeoutThenThingStatusIsCommunicationError()
+
+// WRONG — underscore violates MethodNameCheck
 void whenApiReturnsEmptyList_thenThingGoesOffline()
-void whenTemperatureChannelLinked_thenStateIsUpdatedInCelsius()
-void whenHttpClientThrowsTimeout_thenThingStatusIsCommunicationError()
 
 // WRONG — describes implementation, not behavior; tests too much at once
 void testHandler()
@@ -73,7 +76,7 @@ If a test name needs "and" to describe what it does, split it into multiple test
 
 ---
 
-### No sleep-based waits
+## No sleep-based waits
 
 Never use `Thread.sleep(...)` to wait for asynchronous state changes in tests. Use polling with a timeout instead — see `CallbackMock.waitForStatus(...)` / `waitForOnline()` for the established pattern in this project.
 
@@ -89,11 +92,11 @@ callback.waitForOnline();
 assertEquals(ThingStatus.ONLINE, thing.getStatus());
 ```
 
-`Awaitility` (`org.awaitility.Awaitility`) is an acceptable alternative if already a test dependency — but introducing it as a *new* dependency requires `$Architect` + human approval (pom.xml is protected).
+`Awaitility` (`org.awaitility.Awaitility`) is an acceptable alternative if already a test dependency — but introducing it as a _new_ dependency requires `$Architect` + human approval (pom.xml is protected).
 
 ---
 
-### Mandatory edge-case checklist for API clients
+## Mandatory edge-case checklist for API clients
 
 Every test class for an HTTP/API client (`*ApiClient`, `*Connection`, etc.) must cover at minimum:
 
@@ -105,7 +108,7 @@ Every test class for an HTTP/API client (`*ApiClient`, `*Connection`, etc.) must
 
 ---
 
-### Parameterized tests for mappings and enums
+## Parameterized tests for mappings and enums
 
 Use `@ParameterizedTest` with `@CsvSource`, `@EnumSource`, or `@MethodSource` for any test that checks a mapping table — e.g. API status codes to `ThingStatus`, raw values to `State` types, or unit conversions. Avoid copy-pasted near-identical test methods.
 
@@ -123,7 +126,33 @@ void apiStatusMapsToThingStatus(String apiStatus, ThingStatus expected) {
 
 ---
 
-### Minimum coverage expectation per new class
+## `@SuppressWarnings("null")` on `@NonNullByDefault` test classes using Mockito
+
+Mockito (`mock`, `when`, `ArgumentMatchers`, `ArgumentCaptor`) and several JDK classes used in tests (e.g. `HttpClient`, `HttpResponse`) are not designed with null type annotations in mind. Combined with a `@NonNullByDefault` test class, this produces "unsafe interpretation of method return type as `@NonNull`" compiler advisories at nearly every mocked call — noise, not a real null-safety issue.
+
+Add a class-level `@SuppressWarnings("null")` (merge into an existing `@SuppressWarnings({...})` if the class already has one, e.g. `"unchecked"` for raw Mockito generics) rather than annotating individual call sites, and note why in the class Javadoc:
+
+```java
+/**
+ * Unit tests for {@link MyHandler}.
+ *
+ * <p>
+ * {@code @SuppressWarnings("null")}: Mockito is not designed with null type annotations in mind, so combining it
+ * with this {@code @NonNullByDefault} test class produces "unsafe interpretation" compiler advisories with no
+ * null-safety benefit.
+ *
+ * @author ...
+ */
+@NonNullByDefault
+@SuppressWarnings("null")
+class MyHandlerTest {
+```
+
+Do not add a defensive `if (x == null)` check to silence this class of warning at a single call site instead — if the compiler already treats the value as `@NonNull` (which is what triggers this advisory), the check becomes unreachable and the compiler flags it as dead code instead, which is worse (a real warning, not just an info-level advisory).
+
+---
+
+## Minimum coverage expectation per new class
 
 - Every new `*Handler` class needs at least one happy-path test (initialize → ONLINE) and one error-path test (initialize → OFFLINE/error status).
 - Every new `*ApiClient` / `*Connection` class needs the full edge-case checklist above.

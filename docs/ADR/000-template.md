@@ -17,9 +17,11 @@ State it clearly and directly: "We will use X because Y."
 ## Consequences
 
 ### Positive
+
 - What becomes easier or better as a result?
 
 ### Negative
+
 - What becomes harder, more complex, or is accepted as a trade-off?
 
 ## Diagram (optional)
@@ -27,6 +29,7 @@ State it clearly and directly: "We will use X because Y."
 Use a Mermaid diagram if it helps visualize the decision — e.g. class relationships, sequence flows, or component boundaries.
 
 **Class diagram example:**
+
 ```mermaid
 classDiagram
     class MyDeviceHandler {
@@ -42,6 +45,7 @@ classDiagram
 ```
 
 **Sequence diagram example:**
+
 ```mermaid
 sequenceDiagram
     participant H as ThingHandler
@@ -56,6 +60,7 @@ sequenceDiagram
 ```
 
 **Component diagram example:**
+
 ```mermaid
 graph TD
     A[MyDeviceHandler] -->|uses| B[MyDeviceConfig]
@@ -65,4 +70,4 @@ graph TD
 
 ---
 
-*Replace this template content. Remove unused sections and diagrams.*
+_Replace this template content. Remove unused sections and diagrams._

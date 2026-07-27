@@ -26,21 +26,23 @@ Building an openHAB binding requires deep knowledge of Java, OSGi, the openHAB A
 A structured AI context layer consisting of:
 
 1. **Global rules** (`CLAUDE.md`) — loaded automatically, apply to every message
-2. **Official guidelines** (`rules/`) — openHAB coding standards and PR checklist, always active
-3. **Role system** (`skills/`) — six specialist personas activated on demand via `$Tag`
-4. **Decision tracking** (ADRs) — every architectural choice recorded automatically
-5. **Governance** — pom.xml and i18n changes are protected by explicit rules
+1. **Official guidelines** (`rules/`) — openHAB coding standards and PR checklist, always active
+1. **Role system** (`skills/`) — six specialist personas activated on demand via `$Tag`
+1. **Decision tracking** (ADRs) — every architectural choice recorded automatically
+1. **Governance** — pom.xml and i18n changes are protected by explicit rules
 
 ---
 
 ## Target Audience
 
 ### Primary: openHAB binding developers
+
 - Developers writing new bindings or maintaining existing ones
 - Familiar with Java, but not necessarily with all openHAB-specific conventions
 - Want faster, more consistent development without reading all the guidelines manually
 
 ### Secondary: openHAB community contributors
+
 - Contributors preparing PRs who want to pass review on the first attempt
 - Users validating a feature idea before investing development time
 

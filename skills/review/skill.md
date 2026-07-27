@@ -11,7 +11,7 @@ For each item: check, report status (✅ OK / ⚠️ needs attention / ❌ missi
 
 ## Output Format
 
-```
+```markdown
 ## openHAB Review Checklist
 
 ### Structure & Build
@@ -33,6 +33,7 @@ End with a prioritized list of the most critical fixes.
 ## Coding Standards
 
 Cross-check all findings against:
+
 - `rules/openhab-review-checklist.md` — the primary 44-item checklist
 - `rules/java-coding-rules.md` — custom project rules (null handling, NonNullByDefault, etc.)
 - `rules/openhab-coding-guidelines.md` — official guidelines (logging, runtime behavior, formatting)

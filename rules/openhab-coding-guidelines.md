@@ -1,6 +1,6 @@
 # openHAB Coding Guidelines
 
-> Source: https://www.openhab.org/docs/developer/guidelines.html
+> Source: <https://www.openhab.org/docs/developer/guidelines.html>
 
 The following guidelines apply to all (Java) code of the openHAB project.
 They must be followed to ensure a consistent code base for easy readability and maintainability.
@@ -65,7 +65,7 @@ Rules are enforced via [Spotless Maven Plugin](https://github.com/diffplug/spotl
 - Check: `mvn spotless:check` (or `mvn spotless:check -Dspotless.check.skip=false`)
 - Fix: `mvn spotless:apply`
 
-Code style files: https://github.com/openhab/static-code-analysis/tree/main/codestyle/src/main/resources
+Code style files: <https://github.com/openhab/static-code-analysis/tree/main/codestyle/src/main/resources>
 
 #### Java Code
 
@@ -138,8 +138,8 @@ An `@author` tag is required for every author who made a substantial contributio
 ## D. Language Levels and Libraries
 
 1. Target: **Java 21** (long-term support release)
-2. Target: **OSGi Core Release 8** / **OSGi Compendium Release 8** — do not use newer features
-3. Use **SLF4J** for logging
+1. Target: **OSGi Core Release 8** / **OSGi Compendium Release 8** — do not use newer features
+1. Use **SLF4J** for logging
 
 See [Default Libraries](#default-libraries) for available third-party libraries.
 
@@ -148,9 +148,9 @@ See [Default Libraries](#default-libraries) for available third-party libraries.
 ## E. Runtime Behavior
 
 1. Overridden methods must return fast. Schedule expensive operations as jobs.
-2. **Do not create threads.** Use existing schedulers. For jobs without a fixed rate, prefer `scheduleWithFixedDelay` over `scheduleAtFixedRate`.
-3. Bundles must cleanly start and stop without exceptions. Test with `stop <bundle-id>` / `start <bundle-id>` from the console.
-4. Bundles must not require substantial CPU time.
+1. **Do not create threads.** Use existing schedulers. For jobs without a fixed rate, prefer `scheduleWithFixedDelay` over `scheduleAtFixedRate`.
+1. Bundles must cleanly start and stop without exceptions. Test with `stop <bundle-id>` / `start <bundle-id>` from the console.
+1. Bundles must not require substantial CPU time.
 
 ---
 
@@ -277,6 +277,7 @@ private @NonNullByDefault({}) MyService injectedService;
 ### Default Libraries
 
 #### XML Processing
+
 - `com.thoughtworks.xstream`
 - `com.thoughtworks.xstream.annotations`
 - `com.thoughtworks.xstream.converters`
@@ -284,9 +285,11 @@ private @NonNullByDefault({}) MyService injectedService;
 - `com.thoughtworks.xstream.io.xml`
 
 #### JSON Processing
+
 - `com.google.gson.*`
 
 #### HTTP Operations
+
 - `org.eclipse.jetty.client.*`
 - `org.eclipse.jetty.client.api.*`
 - `org.eclipse.jetty.http.*`
@@ -295,12 +298,14 @@ private @NonNullByDefault({}) MyService injectedService;
 > **Note:** Obtain `HttpClient` instances via `HttpClientFactory` service. Use the shared instance unless specific configuration is required.
 
 #### WebSocket Operations
+
 - `org.eclipse.jetty.websocket.client`
 - `org.eclipse.jetty.websocket.api`
 
 > **Note:** Obtain `WebSocketClient` instances via `WebSocketClientFactory` service.
 
 #### Server Sent Events (SSE)
+
 - `javax.ws.rs.client`
 - `javax.ws.rs.core`
 - `javax.ws.rs.sse`
