@@ -1,5 +1,5 @@
 ---
-description: Run the full openHAB vibe-coding pipeline end to end (Concept -> Spec -> Architect -> Dev -> QA -> Writer -> Review -> Release) for one feature, using the role subagents automatically.
+description: Run the full openHAB spec-driven development pipeline end to end (Concept -> Spec -> Architect -> Dev -> QA -> Writer -> Review -> Release) for one feature, using the role subagents automatically.
 argument-hint: <feature description>
 ---
 

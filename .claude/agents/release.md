@@ -43,7 +43,7 @@ Run the following three Maven commands **in sequence** from the binding's root d
 
 1. **Archive the completed change:**
 
-   Move `org.openhab.binding.<name>/docs/changes/<change-id>/` to `org.openhab.binding.<name>/docs/changes/archive/<YYYY-MM-DD>-<change-id>/`. Merge its delta spec (`ADDED`/`MODIFIED`/`REMOVED` sections) into the matching `org.openhab.binding.<name>/docs/specs/<domain>/spec.md`: append `ADDED` requirements, replace `MODIFIED` ones, delete `REMOVED` ones. Only do this after `clean install` succeeds.
+   Use a shell `mv` (not the Edit/Write tools) to move `org.openhab.binding.<name>/docs/changes/<change-id>/` to `org.openhab.binding.<name>/docs/changes/archive/<YYYY-MM-DD>-<change-id>/`. Merge its delta spec (`ADDED`/`MODIFIED`/`REMOVED` sections) into the matching `org.openhab.binding.<name>/docs/specs/<domain>/spec.md`: append `ADDED` requirements, replace `MODIFIED` ones, delete `REMOVED` ones — do this edit to `docs/specs/` _before_ moving the change folder, since `docs/changes/archive/` is hook-protected against Edit/Write once populated. Only do this after `clean install` succeeds.
 
 ## Output
 

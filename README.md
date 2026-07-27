@@ -1,6 +1,6 @@
 # openHAB Claude – AI-Powered Binding Development
 
-> Vibe Coding for openHAB — build production-ready bindings faster with a structured AI development team at your side.
+> Spec-Driven Development for openHAB — build production-ready bindings faster with a structured AI development team at your side.
 
 Developing an openHAB binding requires deep knowledge of Java, OSGi, openHAB APIs, coding guidelines, and PR standards.
 This repository turns Claude AI into a **complete, opinionated development team** — ready to use, zero configuration.
@@ -64,9 +64,9 @@ Under **Project Knowledge**, add both folders:
 
 ---
 
-## Step 4: Start Vibe Coding
+## Step 4: Start Spec-Driven Development
 
-**Vibe Coding** means: you describe what you want — Claude thinks along, suggests, and writes code.
+**Spec-Driven Development** means: you describe what you want, `$Spec` turns it into a testable Requirement/Scenario specification, and only then does `$Architect`/`$Dev` design and write the code.
 To keep things structured, activate a **role** by adding a `$Tag` at the start of your message.
 
 ```text
@@ -221,7 +221,7 @@ Claude Code invokes, in order: `concept`, `spec`, `architect`, `dev`, `qa`, `wri
 - Review-checklist blockers (including unsatisfied spec scenarios) follow the same one-retry pattern before stopping.
 - Any `pom.xml` change pauses the pipeline and shows you the dependency proposal for approval, mirroring the manual `$Architect` process. A hook additionally enforces this at the tool level, regardless of which stage triggers the edit.
 - Any write under `src/main/resources/OH-INF/i18n/` is blocked outright by the same hook. Only `mvn i18n:generate-default-translations`, run automatically during the `release` stage, may touch that folder.
-- Once `clean install` succeeds, `release` archives the change folder and merges its delta spec into `docs/specs/` — see [Spec-Driven Workflow](#spec-driven-workflow).
+- Once `clean install` succeeds, `release` archives the change folder and merges its delta spec into `docs/specs/` — see [Spec-Driven Workflow](#spec-driven-workflow). Once archived, the same hook blocks any further Edit/Write under `docs/changes/archive/` — archived changes are immutable history.
 
 ### Manual roles still work
 

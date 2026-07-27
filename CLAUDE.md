@@ -21,6 +21,7 @@
 - **pom.xml is protected** — only `$Architect` may propose changes to `pom.xml`. No other role may modify it. Every dependency change requires explicit human approval before being applied (human in the loop).
 - **Markdown must pass markdownlint** — follow `rules/markdown-rules.md` for every `.md` file. Key rules: blank lines around headings (MD022), blank lines around lists (MD032), ordered lists always use `1.` prefix (MD029), fenced code blocks always declare a language (MD040).
 - **i18n folder is off-limits** — never create, edit, or delete any file under `src/main/resources/OH-INF/i18n/`. Translation files are generated exclusively by running `mvn i18n:generate-default-translations`. Any i18n key additions must go through the XML source files (`thing-types.xml`, `addon.xml`, etc.) only.
+- **Archived changes are immutable** — once a change folder has been moved to `docs/changes/archive/` by `$Release`, it must never be edited again. If a spec turns out to be wrong, open a new change instead of rewriting history.
 - **Java coding rules** — `rules/java-coding-rules.md` covers license headers, Java 21 usage, null-handling, `@NonNullByDefault`, architecture rules (for `$Architect`), and developer rules (for `$Dev`). Always loaded.
 - **Testing rules** — `rules/testing-rules.md` covers test fixtures, Arrange-Act-Assert structure, naming, edge-case checklists, and coverage expectations (for `$QA`/`$Dev`). Always loaded.
 

@@ -2,7 +2,7 @@
 """
 PreToolUse guard hook for the openHAB Claude pipeline.
 
-Enforces two rules from CLAUDE.md at the tool-call level, regardless of
+Enforces three rules from CLAUDE.md at the tool-call level, regardless of
 which subagent ($Architect, $Dev, $QA, ...) is attempting the write:
 
 1. pom.xml is protected: any Edit/Write/MultiEdit targeting a pom.xml
@@ -10,6 +10,11 @@ which subagent ($Architect, $Dev, $QA, ...) is attempting the write:
 2. The i18n folder (src/main/resources/OH-INF/i18n/) is off-limits to
    direct edits: it may only be generated via
    `mvn i18n:generate-default-translations` -> permissionDecision "deny".
+3. Archived changes (docs/changes/archive/) are immutable: once a change
+   folder has been archived by $Release, no role may Edit/Write into it
+   again -> permissionDecision "deny". $Release populates this folder via
+   a shell `mv`, not via the Edit/Write tools, so this rule never blocks
+   the archiving step itself.
 
 Reads the PreToolUse hook payload from stdin and writes a decision to
 stdout using Claude Code's hookSpecificOutput JSON schema. No output
@@ -52,6 +57,13 @@ def decide(path: str):
             "are generated exclusively via "
             "`mvn i18n:generate-default-translations`. Add/change keys in "
             "thing-types.xml or addon.xml instead."
+        )
+
+    if "docs/changes/archive/" in normalized:
+        return "deny", (
+            "docs/changes/archive/ is immutable per CLAUDE.md: archived "
+            "changes are historical record and must never be edited after "
+            "the fact. If the spec was wrong, open a new change instead."
         )
 
     return None, None
