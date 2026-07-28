@@ -4,6 +4,8 @@
 > Add your own rules here whenever you find patterns that Claude should always follow in your codebase.
 > Testing conventions and reusable test fixtures live in `rules/testing-rules.md`.
 
+## General Rules
+
 ### License header — required on every Java file
 
 Every new Java file must start with this exact license header:

@@ -1,26 +1,29 @@
 ---
-description: Run the full openHAB vibe-coding pipeline end to end (Concept -> Architect -> Dev -> QA -> Writer -> Review -> Release) for one feature, using the role subagents automatically.
+description: Run the full openHAB spec-driven development pipeline end to end (Concept -> Spec -> Architect -> Dev -> QA -> Writer -> Review -> Release) for one feature, using the role subagents automatically.
 argument-hint: <feature description>
 ---
+
+# Pipeline Orchestrator
 
 You are the **orchestrator** of the openHAB Claude structured pipeline for this feature request:
 
 > $ARGUMENTS
 
-Run the following stages **in order**, using the Task tool to invoke each named subagent (`concept`, `architect`, `dev`, `qa`, `writer`, `review`, `release`). Pass each subagent the relevant prior handoffs as context — do not make it re-derive decisions earlier stages already made. Do not ask the user for confirmation between stages; the pipeline proceeds automatically **except** at the two explicit gates described below.
+Run the following stages **in order**, using the Task tool to invoke each named subagent (`concept`, `spec`, `architect`, `dev`, `qa`, `writer`, `review`, `release`). Pass each subagent the relevant prior handoffs as context — do not make it re-derive decisions earlier stages already made. Do not ask the user for confirmation between stages; the pipeline proceeds automatically **except** at the two explicit gates described below.
 
 ## Stages
 
-1. **`concept`** — feature validation. Pass it: `$ARGUMENTS`. Take its `Handoff to $Architect` section forward.
-2. **`architect`** — structure and design. Pass it the concept handoff.
+1. **`concept`** — feature validation. Pass it: `$ARGUMENTS`. Take its `Handoff to $Spec` section forward.
+1. **`spec`** — testable Requirement/Scenario specs, `proposal.md`, and `tasks.md`. Pass it the concept handoff. Take its `Handoff to $Architect` section forward.
+1. **`architect`** — structure and design. Pass it the spec handoff.
    - **Gate — dependency proposal:** if its output contains a `## Dependency Proposal` block, **stop the pipeline here**. Show the proposal to the user verbatim in your reply and wait for their explicit approval or rejection in the conversation. Do not continue to `dev` until you have that reply. If approved, re-invoke `architect` to apply the `pom.xml` change and document the ADR — this Edit will additionally trigger an interactive permission prompt via the repository's hook, which is expected. If rejected, ask `architect` to proceed without the dependency and continue the pipeline.
-3. **`dev`** — implementation. Pass it the architect handoff.
-4. **`qa`** — review. Pass it the dev handoff.
+1. **`dev`** — implementation. Pass it the architect handoff, including the `tasks.md` checklist from `spec`.
+1. **`qa`** — review. Pass it the dev handoff.
    - **Self-correction loop:** if the verdict is `QA-VERDICT: FAIL`, send the `Handoff to $Dev` defect list back to `dev` for **one** correction pass, then re-run `qa` once. If it still fails after that single retry, stop the pipeline and report the unresolved defects to the user instead of looping further.
-5. **`writer`** — documentation. Only runs once `qa` passes. Pass it the dev + qa handoffs.
-6. **`review`** — 44-point checklist. Pass it the writer handoff.
+1. **`writer`** — documentation. Only runs once `qa` passes. Pass it the dev + qa handoffs.
+1. **`review`** — 44-point checklist plus spec compliance against the change's delta spec. Pass it the writer handoff and the delta spec from `spec`.
    - **Blocking loop:** if the verdict is `REVIEW-VERDICT: BLOCKED`, send the critical items back to `dev` for **one** correction pass, then re-run `review` once. If still blocked, stop and report to the user instead of looping further.
-7. **`release`** — `spotless:apply` -> `i18n:generate-default-translations` -> `clean install`. Only runs once `review` reports `READY`.
+1. **`release`** — `spotless:apply` -> `i18n:generate-default-translations` -> `clean install` -> archive the change folder (delta merged into `docs/specs/`). Only runs once `review` reports `READY`.
    - If the build fails, report the failing command and output, and state whether it looks like a `dev` or `qa` issue — do not attempt further automatic retries.
 
 ## Gate summary (the only two stops in an otherwise automatic run)

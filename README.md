@@ -1,31 +1,32 @@
 # openHAB Claude – AI-Powered Binding Development
 
-> Vibe Coding for openHAB — build production-ready bindings faster with a structured AI development team at your side.
+> Spec-Driven Development for openHAB — build production-ready bindings faster with a structured AI development team at your side.
 
 Developing an openHAB binding requires deep knowledge of Java, OSGi, openHAB APIs, coding guidelines, and PR standards.
 This repository turns Claude AI into a **complete, opinionated development team** — ready to use, zero configuration.
 
-- ✅ **Provides a complete AI development team** — Architect, Developer, QA, Writer, and PR Reviewer roles, each with a distinct focus and expertise
+- ✅ **Provides a complete AI development team** — Requirements Engineer, Architect, Developer, QA, Writer, and PR Reviewer roles, each with a distinct focus and expertise
+- ✅ **Spec-driven** — every feature gets a testable Requirement/Scenario spec and change proposal before design or code, checked again by `$Review` before release
 - ✅ **Enforces official openHAB coding guidelines** — automatically, on every response
 - ✅ **Enforces the official PR review checklist** — 44-point review before every pull request
 - ✅ **Language-aware** — chat in any language, all project files stay in English
 - ✅ **Decision tracking built-in** — every architectural decision recorded as an ADR with optional Mermaid diagrams
 - ✅ **Dependency governance** — new libraries require `$Architect` approval, automatic license analysis via Maven, human-in-the-loop confirmation before any `pom.xml` change
 - ✅ **Extensible by design** — add your own coding rules alongside the official guidelines
-- ✅ **Optional automated pipeline** — `/pipeline` (Claude Code only) runs Concept → Architect → Dev → QA → Writer → Review → Release end to end, with the same governance gates enforced by hooks
+- ✅ **Optional automated pipeline** — `/pipeline` (Claude Code only) runs Concept → Spec → Architect → Dev → QA → Writer → Review → Release end to end, with the same governance gates enforced by hooks
 - ✅ **Works with Claude.ai Projects, Claude Code, and Open WebUI**
 
 ---
 
 ## Step 1: Set Up the Development Environment
 
-→ https://www.openhab.org/docs/developer/
+→ <https://www.openhab.org/docs/developer/>
 
 ---
 
 ## Step 2: Create a New Binding
 
-→ https://www.openhab.org/docs/developer/#develop-a-new-binding
+→ <https://www.openhab.org/docs/developer/#develop-a-new-binding>
 
 ---
 
@@ -36,9 +37,9 @@ Claude remembers the context — you don't have to re-explain rules and backgrou
 
 ### 3.1 Create a Project
 
-1. Go to https://claude.ai
-2. Click **Projects** → **New Project** on the left
-3. Give it a name, e.g. `openHAB MyNewBinding`
+1. Go to <https://claude.ai>
+1. Click **Projects** → **New Project** on the left
+1. Give it a name, e.g. `openHAB MyNewBinding`
 
 ### 3.2 Add Two Folders as Context
 
@@ -63,12 +64,12 @@ Under **Project Knowledge**, add both folders:
 
 ---
 
-## Step 4: Start Vibe Coding
+## Step 4: Start Spec-Driven Development
 
-**Vibe Coding** means: you describe what you want — Claude thinks along, suggests, and writes code.
+**Spec-Driven Development** means: you describe what you want, `$Spec` turns it into a testable Requirement/Scenario specification, and only then does `$Architect`/`$Dev` design and write the code.
 To keep things structured, activate a **role** by adding a `$Tag` at the start of your message.
 
-```
+```text
 $Dev: Write a method that sets the Thing status to ONLINE.
 $Architect: How should we structure the configuration parameters?
 $QA: What can go wrong with the HTTP connection?
@@ -83,14 +84,16 @@ Claude then acts as a specialist in that role — with the matching focus and to
 | Tag | Role | When to use |
 |---|---|---|
 | `$Concept` | Product Strategist | Feature ideas, "Does this make sense?", big picture |
+| `$Spec` | Requirements Engineer | Turn an approved idea into a testable Requirement/Scenario spec and task checklist, before design or code |
 | `$Architect` | System Designer | Structure, API design, class diagrams, dependencies |
 | `$Dev` | Developer | Writing code, fixing bugs, refactoring |
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, explanations for the community |
-| `$Review` | PR Reviewer | Full review against the official openHAB checklist |
-| `$Release` | Release Preparer | `spotless:apply` → `i18n:generate-default-translations` → `clean install` |
+| `$Review` | PR Reviewer | Full checklist review, plus a spec-compliance check against the change's scenarios |
+| `$Release` | Release Preparer | `spotless:apply` → `i18n:generate-default-translations` → `clean install`, then archive the completed change |
+| `$UIDev` | UI Widget Author | openHAB Main UI widget YAML (F7/Vue 3), JEXL expressions, charts/overlays |
 
-> `$Review` only on explicit request — it runs through the complete 44-item checklist.
+> `$Review` only on explicit request — it runs through the complete 44-item checklist. `$UIDev` is used standalone, on demand — it is not part of the `/pipeline` sequence below.
 
 ---
 
@@ -103,7 +106,9 @@ openhab-claude/
 ├── docs/
 │   ├── ARCHITECTURE.md                 ← Repository architecture overview
 │   ├── CONCEPT.md                      ← Vision, goals, target audience
-│   └── ADR/                            ← Architecture Decision Records
+│   ├── ADR/                            ← Architecture Decision Records (template)
+│   ├── specs/000-template.md           ← Requirement/Scenario spec template
+│   └── changes/000-template/           ← proposal.md, tasks.md, specs/ delta template
 ├── rules/
 │   ├── java-coding-rules.md            ← Java rules: headers, Java 21, architecture, dev rules
 │   ├── testing-rules.md                ← Testing conventions and reusable test fixtures
@@ -112,16 +117,19 @@ openhab-claude/
 │   ├── openhab-coding-guidelines.md    ← Official openHAB guidelines
 │   └── openhab-review-checklist.md     ← Official PR checklist (44 items)
 └── skills/
-    ├── architect/skill.md
     ├── concept/skill.md
-    ├── dev/skill.md
-    ├── qa/skill.md
-    ├── release/skill.md
+    ├── spec/SKILL.md
+    ├── architect/SKILL.md
+    ├── dev/SKILL.md
+    ├── qa/SKILL.md
+    ├── writer/skill.md
     ├── review/skill.md
-    └── writer/skill.md
+    ├── release/skill.md
+    └── uidev/SKILL.md
 ```
 
 **Important:**
+
 - `rules/` — loaded with every session. These are the rules that **always** apply.
 - `skills/` — only loaded when you activate a role with a `$Tag`.
 
@@ -132,7 +140,7 @@ openhab-claude/
 Every architecture or design decision is recorded as an ADR (Architecture Decision Record).
 ADRs live inside the binding folder, not here:
 
-```
+```text
 org.openhab.binding.mynewbinding/
 └── docs/ADR/
     ├── 001-thing-handler-structure.md
@@ -144,15 +152,35 @@ You don't need to trigger this manually — Claude creates the ADR as soon as a 
 
 ---
 
+## Spec-Driven Workflow
+
+Before `$Architect`/`$Dev` start on a feature, `$Spec` turns the approved `$Concept` idea into a testable specification — inspired by [OpenSpec](https://github.com/Fission-AI/OpenSpec), reduced to the parts that don't duplicate what already exists here (no separate `design.md` — technical rationale stays in the ADR).
+
+```text
+org.openhab.binding.mynewbinding/docs/
+├── specs/                        ← source of truth: how the binding currently behaves
+│   └── <domain>/spec.md          ← Requirement / Scenario (Given/When/Then), RFC 2119 keywords
+├── changes/<change-id>/          ← work in progress, one folder per feature
+│   ├── proposal.md               ← why + scope (in/out)
+│   ├── tasks.md                  ← implementation checklist for $Dev
+│   └── specs/<domain>/spec.md    ← delta: ADDED / MODIFIED / REMOVED Requirements
+└── changes/archive/              ← moved here by $Release, deltas merged into specs/
+```
+
+`$QA` maps test cases to scenarios, and `$Review` checks spec compliance in addition to the 44-point checklist. Templates: `docs/specs/000-template.md` and `docs/changes/000-template/`. Full convention in `skills/spec/SKILL.md`.
+
+---
+
 ## Typical Workflow
 
-```
+```text
 1. $Concept   → Clarify and validate the feature
-2. $Architect → Decide on structure and design (→ ADR)
-3. $Dev       → Write code following rules/
-4. $QA        → Review code, define test cases
-5. $Writer    → Documentation and README
-6. $Review    → Before the PR: run the full checklist
+2. $Spec      → Write the Requirement/Scenario spec, proposal, and task checklist
+3. $Architect → Decide on structure and design (→ ADR)
+4. $Dev       → Write code following rules/ and the tasks.md checklist
+5. $QA        → Review code, define test cases mapped to scenarios
+6. $Writer    → Documentation and README
+7. $Review    → Before the PR: run the full checklist plus spec compliance
 ```
 
 You can switch or combine roles at any time. No rigid process — just a clear orientation.
@@ -185,14 +213,15 @@ Run the full pipeline for one feature from Claude Code:
 /pipeline Add support for polling battery level every 5 minutes
 ```
 
-Claude Code invokes, in order: `concept`, `architect`, `dev`, `qa`, `writer`, `review`, `release`. Each subagent hands its output to the next one, so you don't need to copy context between stages yourself.
+Claude Code invokes, in order: `concept`, `spec`, `architect`, `dev`, `qa`, `writer`, `review`, `release`. Each subagent hands its output to the next one, so you don't need to copy context between stages yourself.
 
 ### Automatic safeguards
 
 - QA failures trigger one automatic correction pass back to `dev`, then a re-test. Two consecutive failures stop the pipeline and report to you instead of looping.
-- Review-checklist blockers follow the same one-retry pattern before stopping.
+- Review-checklist blockers (including unsatisfied spec scenarios) follow the same one-retry pattern before stopping.
 - Any `pom.xml` change pauses the pipeline and shows you the dependency proposal for approval, mirroring the manual `$Architect` process. A hook additionally enforces this at the tool level, regardless of which stage triggers the edit.
 - Any write under `src/main/resources/OH-INF/i18n/` is blocked outright by the same hook. Only `mvn i18n:generate-default-translations`, run automatically during the `release` stage, may touch that folder.
+- Once `clean install` succeeds, `release` archives the change folder and merges its delta spec into `docs/specs/` — see [Spec-Driven Workflow](#spec-driven-workflow). Once archived, the same hook blocks any further Edit/Write under `docs/changes/archive/` — archived changes are immutable history.
 
 ### Manual roles still work
 
