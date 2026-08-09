@@ -86,6 +86,7 @@ Claude then acts as a specialist in that role — with the matching focus and to
 | `$Concept` | Product Strategist | Feature ideas, "Does this make sense?", big picture |
 | `$Spec` | Requirements Engineer | Turn an approved idea into a testable Requirement/Scenario spec and task checklist, before design or code |
 | `$Architect` | System Designer | Structure, API design, class diagrams, dependencies |
+| `$Generate` | Catalogue-to-Binding Generator | Turn a schema-valid Modbus catalogue JSON into thing-types.xml + register-map Java scaffolding |
 | `$Dev` | Developer | Writing code, fixing bugs, refactoring |
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, explanations for the community |
@@ -93,7 +94,7 @@ Claude then acts as a specialist in that role — with the matching focus and to
 | `$Release` | Release Preparer | `spotless:apply` → `i18n:generate-default-translations` → `clean install`, then archive the completed change |
 | `$UIDev` | UI Widget Author | openHAB Main UI widget YAML (F7/Vue 3), JEXL expressions, charts/overlays |
 
-> `$Review` only on explicit request — it runs through the complete 44-item checklist. `$UIDev` is used standalone, on demand — it is not part of the `/pipeline` sequence below.
+> `$Review` only on explicit request — it runs through the complete 44-item checklist. `$UIDev` and `$Generate` are used standalone, on demand — neither is part of the `/pipeline` sequence below.
 
 ---
 
@@ -113,6 +114,7 @@ openhab-claude/
 │   ├── java-coding-rules.md            ← Java rules: headers, Java 21, architecture, dev rules
 │   ├── testing-rules.md                ← Testing conventions and reusable test fixtures
 │   ├── markdown-rules.md               ← markdownlint-compliant Markdown rules
+│   ├── thing-types-content-rules.md    ← label/description wording for thing-types.xml, addon.xml
 │   ├── test-fixtures/                  ← Reusable mock/helper classes for unit tests
 │   ├── openhab-coding-guidelines.md    ← Official openHAB guidelines
 │   └── openhab-review-checklist.md     ← Official PR checklist (44 items)
@@ -120,7 +122,8 @@ openhab-claude/
     ├── concept/skill.md
     ├── spec/SKILL.md
     ├── architect/SKILL.md
-    ├── dev/SKILL.md
+    ├── generate/skill.md
+    ├── dev/skill.md
     ├── qa/SKILL.md
     ├── writer/skill.md
     ├── review/skill.md
