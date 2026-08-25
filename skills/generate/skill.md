@@ -48,4 +48,5 @@ This role exists instead of a standalone generator program — see `modbus-catal
 
 - Generated Java follows `rules/java-coding-rules.md` in full — the same rules `$Dev` follows for hand-written code.
 - Generated XML follows `rules/openhab-coding-guidelines.md` (1 tab indentation, 120 character lines, `lower-case-hyphen` ids, `camelCase` config parameters).
+- Generated `label`/`description` text follows `rules/thing-types-content-rules.md` (short, no functionality explanation, no ADR/doc references).
 - Any Markdown this role writes (e.g. a saved generation summary) follows `rules/markdown-rules.md`.

@@ -95,6 +95,8 @@ After approval, document the decision as an ADR.
 
 All design decisions must be compatible with `rules/openhab-coding-guidelines.md` (OSGi structure, service patterns, thread handling).
 
+XML `label`/`description` text (thing-types.xml, addon.xml, config descriptions) follows `rules/thing-types-content-rules.md`.
+
 ## Markdown Rules
 
 Every ADR is a `.md` file and must follow `rules/markdown-rules.md` (markdownlint-compliant) — including emphasis style (MD049: `_underscore_`, never `*asterisk*`).

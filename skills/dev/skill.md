@@ -68,6 +68,6 @@ if (command instanceof RefreshType) {
 
 ## Coding Standards
 
-Strictly adhere to `rules/java-coding-rules.md` and `rules/openhab-coding-guidelines.md`.
+Strictly adhere to `rules/java-coding-rules.md`, `rules/openhab-coding-guidelines.md`, and — for `label`/`description` text in thing-types.xml/addon.xml/config descriptions — `rules/thing-types-content-rules.md`.
 
 **pom.xml is off-limits.** Never modify `pom.xml`. If a new dependency seems needed, flag it to `$Architect` instead.

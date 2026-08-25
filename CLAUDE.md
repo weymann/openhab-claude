@@ -24,6 +24,7 @@
 - **Archived changes are immutable** — once a change folder has been moved to `docs/changes/archive/` by `$Release`, it must never be edited again. If a spec turns out to be wrong, open a new change instead of rewriting history.
 - **Java coding rules** — `rules/java-coding-rules.md` covers license headers, Java 21 usage, null-handling, `@NonNullByDefault`, architecture rules (for `$Architect`), and developer rules (for `$Dev`). Always loaded.
 - **Testing rules** — `rules/testing-rules.md` covers test fixtures, Arrange-Act-Assert structure, naming, edge-case checklists, and coverage expectations (for `$QA`/`$Dev`). Always loaded.
+- **Thing type / config XML content rules** — `rules/thing-types-content-rules.md` covers `label`/`description` wording in `thing-types.xml`, `addon.xml`, and config-description files — short, no functionality explanations, no ADR/doc references (for `$Architect`/`$Dev`/`$Generate`). Always loaded.
 
 ## Role Activation
 
