@@ -12,7 +12,7 @@
 It must read like a slightly more detailed label — not like a spec excerpt or an internal note.
 
 - Length: one sentence, at most two short sentences.
-- State what the value/channel *is* (and its unit, if relevant) — not how it behaves internally, not why it exists.
+- State what the value/channel _is_ (and its unit, if relevant) — not how it behaves internally, not why it exists.
 - Do not explain functionality, algorithms, state machines, or edge cases. That belongs in JavaDoc, the ADR, or the spec.
 - Do not reference ADRs, `CONCEPT.md`, scenario names, or any other project document (e.g. "see docs/ADR/024-...",
   "per Scenario 2 (isLimitActive)"). The person reading the UI has no access to the repository.
