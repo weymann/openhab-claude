@@ -34,6 +34,7 @@ To activate a specific role, use the **$tag** at the beginning of your message (
 | `$Concept` | Product Strategist | Feature ideas, big picture, UX validation |
 | `$Spec` | Requirements Engineer | Turn an approved idea into testable Requirement/Scenario specs and a task checklist, before design or code |
 | `$Architect` | System Designer | Structure, API design, ADRs, pom.xml governance |
+| `$Generate` | Catalogue-to-Binding Generator | Turn a schema-valid Modbus catalogue JSON into thing-types.xml + register-map Java scaffolding for a binding (see `modbus-catalogues/` for schema/rules/ADRs) |
 | `$Dev` | Developer | Writing code, fixing bugs, refactoring |
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, community documentation |

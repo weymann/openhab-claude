@@ -25,6 +25,7 @@ openhab-claude/
     ├── architect/skill.md
     ├── concept/skill.md
     ├── dev/skill.md
+    ├── generate/skill.md
     ├── qa/skill.md
     ├── review/skill.md
     └── writer/skill.md
@@ -53,6 +54,7 @@ Each role is a separate skill file under `skills/`. A role is activated by prefi
 |-----|------|----------------|
 | `$Concept` | `skills/concept/skill.md` | Feature validation, UX, big picture |
 | `$Architect` | `skills/architect/skill.md` | Structure, API design, ADRs, pom.xml governance |
+| `$Generate` | `skills/generate/skill.md` | Catalogue JSON -> thing-types.xml + register-map Java scaffolding (no standalone program - see `modbus-catalogues/docs/ADR/003-generate-as-claude-skill.md`) |
 | `$Dev` | `skills/dev/skill.md` | Code generation, refactoring, bug fixes |
 | `$QA` | `skills/qa/skill.md` | Edge cases, threading, test strategy |
 | `$Writer` | `skills/writer/skill.md` | README, JavaDoc, community documentation |
