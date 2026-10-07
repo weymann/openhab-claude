@@ -91,10 +91,11 @@ Claude then acts as a specialist in that role — with the matching focus and to
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, explanations for the community |
 | `$Review` | PR Reviewer | Full checklist review, plus a spec-compliance check against the change's scenarios |
+| `$CopilotReview` | GitHub/Copilot Review Analyst | Find out by which criteria GitHub Copilot or an AI-assisted maintainer reviews an openHAB PR, and review against that policy |
 | `$Release` | Release Preparer | `spotless:apply` → `i18n:generate-default-translations` → `clean install`, then archive the completed change |
 | `$UIDev` | UI Widget Author | openHAB Main UI widget YAML (F7/Vue 3), JEXL expressions, charts/overlays |
 
-> `$Review` only on explicit request — it runs through the complete 44-item checklist. `$UIDev` and `$Generate` are used standalone, on demand — neither is part of the `/pipeline` sequence below.
+> `$Review` only on explicit request — it runs through the complete 44-item checklist. `$UIDev`, `$Generate` and `$CopilotReview` are used standalone, on demand — none is part of the `/pipeline` sequence below.
 
 ---
 
@@ -126,6 +127,7 @@ openhab-claude/
     ├── dev/skill.md
     ├── qa/SKILL.md
     ├── writer/skill.md
+    ├── copilot-review/SKILL.md
     ├── review/skill.md
     ├── release/skill.md
     └── uidev/SKILL.md

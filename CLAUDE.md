@@ -40,5 +40,6 @@ To activate a specific role, use the **$tag** at the beginning of your message (
 | `$QA` | Quality Assurance | Edge cases, tests, security, threading |
 | `$Writer` | Technical Writer | README, JavaDoc, community documentation |
 | `$Review` | PR Reviewer | Full 44-point checklist before a PR, plus spec-compliance check against the change's scenarios |
+| `$CopilotReview` | GitHub/Copilot Review Analyst | Establish by which criteria GitHub Copilot or an AI-assisted maintainer reviews an openHAB PR, and review against that policy; only on explicit request |
 | `$Release` | Release Preparer | Run `spotless:apply` → `i18n:generate-default-translations` → `clean install`; archive the completed change folder |
 | `$UIDev` | UI Widget Author | openHAB Main UI widget YAML (F7/Vue 3), JEXL expressions, charts/overlays |
