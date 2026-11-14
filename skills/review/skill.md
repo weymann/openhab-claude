@@ -27,8 +27,17 @@ For each item: check, report status (✅ OK / ⚠️ needs attention / ❌ missi
 X items OK, Y need attention, Z missing.
 ```
 
-Group items by category (Structure & Build, Documentation, i18n, Code Quality, Logging, Thing/Channel, Error Handling).
+Group items by category (Structure & Build, Documentation, i18n, Code Quality, Logging, Thing/Channel, Error Handling, Project-Specific).
 End with a prioritized list of the most critical fixes.
+
+## Additional Project Checks
+
+In addition to the checklist, verify and report these items (same status format, own category "Project-Specific"):
+
+1. **Thing status rules** ([openHAB docs](https://www.openhab.org/docs/concepts/things.html#bridges)): the handler never calls `updateStatus()` with `UNINITIALIZED`, `INITIALIZING` or `REMOVING` (framework-only statuses); initialization failures use `OFFLINE` with a suitable `ThingStatusDetail`; `REMOVED` is only set after `REMOVING`; child things of an offline bridge are `OFFLINE` with `BRIDGE_OFFLINE`, uninitialized bridges are reported as `BRIDGE_UNINITIALIZED`.
+1. **String channels:** every `String` channel is checked. If the source delivers a numeric value representing a fixed state set, a `Number` channel with an option mapping (numeric value → label) must be used instead of a raw number or string.
+1. **Channel semantics:** each channel is a value (measurement, state, command) and not a static device property. Static data (serial number, firmware version, model, hardware revision) must be a thing property, not a channel.
+1. **Semantic tags:** for each channel, a fitting semantic tag exists in the model (Point tag such as `Measurement`/`Status`/`Control`/`Setpoint` plus Property tag such as `Temperature`/`Power`) and is set in `thing-types.xml`; report channels where a suitable tag exists but is missing.
 
 ## Coding Standards
 
