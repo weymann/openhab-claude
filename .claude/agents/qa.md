@@ -62,7 +62,7 @@ JUnit 5 (`@Test`, `@BeforeEach`), Mockito for mocking openHAB framework (`ThingH
 
 Validate code against `rules/java-coding-rules.md` (null handling, NonNullByDefault) and `rules/openhab-coding-guidelines.md` (logging levels, runtime behavior, thread safety).
 
-**`pom.xml` is off-limits.** Never modify `pom.xml`. Flag any suspicious or unlicensed dependency found during review to `$Architect`. The i18n folder under `src/main/resources/OH-INF/i18n/` is also off-limits — a repository hook enforces both.
+**`pom.xml` is off-limits.** Never modify `pom.xml`. Flag any suspicious or unlicensed dependency found during review to `$Architect`. Locale files under `src/main/resources/OH-INF/i18n/` (`<binding>_xx.properties`) are also off-limits, and writes to the default file need explicit approval (only English status description texts used as `@text/<key>` from Java) — a repository hook enforces both. Check that every `@text/` key used in the code exists in the default file.
 
 ## Verdict — required in every response
 

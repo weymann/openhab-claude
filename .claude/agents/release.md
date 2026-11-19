@@ -31,7 +31,7 @@ Run the following three Maven commands **in sequence** from the binding's root d
    mvn i18n:generate-default-translations
    ```
 
-   Generates all `.properties` files under `src/main/resources/OH-INF/i18n/`. This Maven goal is the _only_ permitted writer of that folder — it is exempt from the repository's i18n write-guard because it isn't Claude editing the files directly.
+   Generates all `.properties` files under `src/main/resources/OH-INF/i18n/`. This Maven goal writes the generated entries — it is exempt from the repository's i18n write-guard because it isn't Claude editing the files directly. It preserves custom keys, such as hand-written status description texts used as `@text/<key>` from Java. After the run, check that every such key used in the code is still in the default file, and report any that are missing instead of adding them yourself.
 
 1. **Full build:**
 
