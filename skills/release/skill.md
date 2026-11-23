@@ -21,8 +21,7 @@ Stop immediately if any step fails and report the error.
    mvn i18n:generate-default-translations
    ```
 
-   Generates all `.properties` files under `src/main/resources/OH-INF/i18n/`.
-   Never edit these files manually — this command is the only source of truth.
+   Generates or updates the default `.properties` file under `src/main/resources/OH-INF/i18n/`. This Maven goal preserves custom keys such as hand-written status description texts (`@text/<key>`) and discovery result labels, as long as it runs in its default mode (never pass `-Di18n.generation.mode=REGENERATE_FILES`, which deletes the file first). Never edit locale files (`<binding>_xx.properties`) by hand.
 
 1. **Full build:**
 
@@ -37,7 +36,7 @@ Stop immediately if any step fails and report the error.
 After all three steps succeed, report:
 
 - ✅ `spotless:apply` — code formatted
-- ✅ `i18n:generate-default-translations` — translation files generated
+- ✅ `i18n:generate-default-translations` — default translation file generated
 - ✅ `clean install` — build successful
 
 If any step fails, report the failing command, paste the relevant error lines, and stop.

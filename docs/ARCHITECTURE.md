@@ -78,9 +78,9 @@ Roles can be combined in a single session. There is no enforced sequencing — t
 
 ### i18n Protection
 
-- Files under `src/main/resources/OH-INF/i18n/` are **never created or edited manually**.
-- Translation properties are generated exclusively via `mvn i18n:generate-default-translations`.
-- i18n keys are defined in XML source files (`thing-types.xml`, `addon.xml`) only.
+- Locale files under `src/main/resources/OH-INF/i18n/` are never created or edited by hand; translations are managed via Crowdin.
+- The default file `<binding>.properties` is updated by `mvn i18n:generate-default-translations`; the only hand edits are English custom keys the generator cannot derive from XML — status description texts (used as `@text/<key>` from Java) and discovery result labels — and they require explicit approval via the repository hook.
+- All other i18n keys are defined in XML source files (`thing-types.xml`, `addon.xml`).
 
 ### Decision Tracking
 

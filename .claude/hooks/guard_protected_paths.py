@@ -11,7 +11,9 @@ which subagent ($Architect, $Dev, $QA, ...) is attempting the write:
    (<binding>_xx.properties) and any other file are off-limits ->
    permissionDecision "deny"; the default file <binding>.properties is
    written by `mvn i18n:generate-default-translations`, and a hand edit
-   (status description keys used as @text/ from Java) -> "ask".
+   of custom keys the generator cannot derive from XML (status
+   descriptions used as @text/ from Java, discovery result labels)
+   -> "ask".
 3. Archived changes (docs/changes/archive/) are immutable: once a change
    folder has been archived by $Release, no role may Edit/Write into it
    again -> permissionDecision "deny". $Release populates this folder via
@@ -26,8 +28,10 @@ import json
 import re
 import sys
 
-# <binding>_xx.properties or <binding>_xx_YY.properties
-LOCALE_FILE = re.compile(r"_[a-z]{2,3}(_[A-Za-z]{2,4})?\.properties$")
+# <binding>_xx.properties, <binding>_xx_YY.properties, and the longer forms the
+# openHAB docs allow: UN M.49 region codes (es_419) and script subtags
+# (zh_Hant_TW).
+LOCALE_FILE = re.compile(r"_[a-z]{2,3}(_[A-Za-z0-9]{2,4})*\.properties$")
 
 
 def get_paths(tool_name: str, tool_input: dict) -> list[str]:
@@ -62,10 +66,13 @@ def decide(path: str):
         if name.endswith(".properties") and not LOCALE_FILE.search(name):
             return "ask", (
                 "The default i18n file is written by "
-                "`mvn i18n:generate-default-translations`. The only hand edit "
-                "allowed (openHAB i18n guidelines) is the English text of a "
+                "`mvn i18n:generate-default-translations`. The only hand "
+                "edits allowed (openHAB i18n guidelines) are English custom "
+                "keys that cannot be generated from XML: the text of a "
                 "status description key that the Java code uses as "
-                "`@text/<key>`, in a '# thing status descriptions' section. "
+                "`@text/<key>` (section '# thing status descriptions') and "
+                "discovery result labels `discovery.<binding-id>....label` "
+                "(section '# discovery result'). "
                 "Confirm that this edit is exactly that."
             )
         return "deny", (

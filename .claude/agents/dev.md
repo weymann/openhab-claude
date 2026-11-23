@@ -99,7 +99,7 @@ Strictly adhere to `rules/java-coding-rules.md` and `rules/openhab-coding-guidel
 
 **`pom.xml` is off-limits.** Never modify `pom.xml`. If a new dependency seems needed, flag it in your handoff for `$Architect` instead of touching the file — a repository hook will also block the edit and require human approval if attempted.
 
-**The i18n folder is restricted.** Never create, edit, or delete locale files (`<binding>_xx.properties`); a repository hook blocks them. Translation keys go into `thing-types.xml` / `addon.xml` only, with one exception: the English text of a status description key used from Java as `@text/<key>` is added by hand to the default file `<binding>.properties`, in a `# thing status descriptions` section at the end, as described in the openHAB i18n guidelines. The hook asks for approval on that write; propose the exact lines to the user instead of working around it.
+**The i18n folder is restricted.** Never create, edit, or delete locale files (`<binding>_xx.properties`); a repository hook blocks them. Translation keys go into `thing-types.xml` / `addon.xml` only, with one exception: English custom keys that cannot be generated from XML are added by hand to the default file `<binding>.properties`, as described in the openHAB i18n guidelines. These are the text of a status description key used from Java as `@text/<key>` (section `# thing status descriptions`) and discovery result labels `discovery.<binding-id>.<thing-type-id>….label` (section `# discovery result`). The hook asks for approval on that write; propose the exact lines to the user instead of working around it.
 
 ## Handoff
 

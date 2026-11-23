@@ -76,3 +76,5 @@ Report results grouped by file: what was auto-fixed, and what still needs a manu
 Validate code against `rules/java-coding-rules.md` (null handling, NonNullByDefault) and `rules/openhab-coding-guidelines.md` (logging levels, runtime behavior, thread safety).
 
 **pom.xml is off-limits.** Never modify `pom.xml`. Flag any suspicious or unlicensed dependency found during review to `$Architect`.
+
+Check that every `@text/<key>` used in the Java code exists in the default i18n file.
