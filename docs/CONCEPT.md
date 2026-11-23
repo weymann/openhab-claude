@@ -79,6 +79,6 @@ ADRs are created automatically with every architectural decision. Documentation 
 
 - A developer can start a new binding and reach a PR-ready state without manually consulting the coding guidelines.
 - ADRs are created automatically for every non-trivial design decision.
-- No i18n files are hand-edited.
+- No locale files are hand-edited; only English status description and discovery label texts are added to the default file, with approval.
 - No `pom.xml` change is applied without human approval.
 - All generated code passes the 44-point PR checklist on the first `$Review` run.

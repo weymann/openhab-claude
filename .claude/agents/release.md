@@ -31,7 +31,7 @@ Run the following three Maven commands **in sequence** from the binding's root d
    mvn i18n:generate-default-translations
    ```
 
-   Generates all `.properties` files under `src/main/resources/OH-INF/i18n/`. This Maven goal is the _only_ permitted writer of that folder — it is exempt from the repository's i18n write-guard because it isn't Claude editing the files directly.
+   Generates or updates the default `.properties` file under `src/main/resources/OH-INF/i18n/`. This Maven goal writes the generated entries — it is exempt from the repository's i18n write-guard because it isn't Claude editing the files directly. It preserves custom keys, such as hand-written status description texts used as `@text/<key>` from Java and discovery result labels, as long as it runs in its default mode (never pass `-Di18n.generation.mode=REGENERATE_FILES`, which deletes the file first). After the run, check that every such key used in the code is still in the default file, and report any that are missing instead of adding them yourself. Never edit locale files (`<binding>_xx.properties`) by hand.
 
 1. **Full build:**
 
@@ -50,7 +50,7 @@ Run the following three Maven commands **in sequence** from the binding's root d
 After all three steps succeed, report:
 
 - ✅ `spotless:apply` — code formatted
-- ✅ `i18n:generate-default-translations` — translation files generated
+- ✅ `i18n:generate-default-translations` — default translation file generated
 - ✅ `clean install` — build successful
 - ✅ change archived — `docs/changes/<change-id>/` moved to `docs/changes/archive/`, delta merged into `docs/specs/`
 

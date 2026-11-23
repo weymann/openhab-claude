@@ -29,7 +29,7 @@ Run the following stages **in order**, using the Task tool to invoke each named 
 ## Gate summary (the only two stops in an otherwise automatic run)
 
 - **pom.xml changes** always require your explicit human approval, surfaced in chat by this orchestrator, in addition to the hook-level permission prompt.
-- **i18n folder writes** are never allowed, for any role — the hook denies these outright, no gate/approval possible; the only path is `mvn i18n:generate-default-translations` inside the `release` stage.
+- **i18n file writes** — locale files (`<binding>_xx.properties`) are blocked outright; a write to the default file `<binding>.properties` needs your explicit approval (English status description and discovery label texts only).
 
 ## Final report
 
