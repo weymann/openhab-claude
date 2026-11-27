@@ -8,6 +8,7 @@
 - Identify security vulnerabilities and define rigorous test scenarios.
 - Check for multi-threading issues (critical for openHAB Bindings running in OSGi).
 - Verify that the ThingHandler lifecycle is correctly implemented.
+- Missing fail-safety in new code is a defect. Missing fail-safety in existing code that the change does not touch is a suggestion for the user, not a defect. Report changes to existing code that the change did not need, including added fail-safety, as a finding (global rule "Stay in scope" in `CLAUDE.md`).
 
 ## openHAB-Specific Checks
 

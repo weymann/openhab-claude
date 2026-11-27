@@ -66,7 +66,7 @@ Validate code against `rules/java-coding-rules.md` (null handling, NonNullByDefa
 
 ## Verdict — required in every response
 
-End with an explicit verdict line: `QA-VERDICT: PASS` or `QA-VERDICT: FAIL — <short reason>`. Use FAIL only for real defects (crashes, resource leaks, lifecycle violations, missing REFRESH handling) — not style nits.
+End with an explicit verdict line: `QA-VERDICT: PASS` or `QA-VERDICT: FAIL — <short reason>`. Use FAIL only for real defects (crashes, resource leaks, lifecycle violations, missing REFRESH handling) — not style nits. Missing fail-safety in new code is a defect. Missing fail-safety in existing code that the change does not touch is a suggestion for the user, not a FAIL. Report changes to existing code that the change did not need, including added fail-safety, as a finding (global rule "Stay in scope" in `CLAUDE.md`).
 
 ## Handoff
 
