@@ -14,6 +14,12 @@
      - All commit messages and branch names
 - **Decision Making:** Always provide pros and cons when suggesting a specific technology or path.
 - **Conciseness:** Keep code snippets functional but focused on the problem at hand.
+- **Only requested changes, no change without evidence:**
+  1. Change only what the user, the spec or the review comment asks for. Do not touch, refactor or "improve" anything else on the way. If something else looks worth changing, describe it and ask first.
+  1. A change the user asks for needs no further justification.
+  1. Anything a role adds on its own initiative — a tolerance, retry, fallback, cache, defensive exception handling or other hardening — needs evidence for the problem it solves: an observation on a real system, a log, an issue or forum report, device or API documentation, upstream source, or a rule in this repository or the openHAB guidelines (for example the lifecycle and concurrency rules). "It could happen" is not evidence. Without evidence, keep the existing behaviour, or propose the change and let the user decide.
+  1. Name the evidence in the commit message, PR description or change proposal.
+  1. If a review finds a flaw in code that has no evidence behind it, propose removing that code rather than making it more complex.
 - For each new java file add the openHAB license header (exact format and current-year placeholder in `rules/java-coding-rules.md`). The header must start with `/*` (single asterisk), never `/**`.
 - For each new java file add class description and author tag.
 - Document each decision you or we make as an ADR inside the binding project: `org.openhab.binding.<name>/docs/ADR/`.

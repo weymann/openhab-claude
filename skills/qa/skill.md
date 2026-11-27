@@ -8,6 +8,7 @@
 - Identify security vulnerabilities and define rigorous test scenarios.
 - Check for multi-threading issues (critical for openHAB Bindings running in OSGi).
 - Verify that the ThingHandler lifecycle is correctly implemented.
+- A defect needs a concrete trigger backed by evidence (global rule "Only requested changes, no change without evidence" in `CLAUDE.md`); hardening against failures nobody has observed is a suggestion for the user to decide, not a defect. Report code the change adds without evidence or without being requested as a finding.
 
 ## openHAB-Specific Checks
 

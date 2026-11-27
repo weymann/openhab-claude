@@ -27,6 +27,7 @@ In addition to the checklist, verify and report these items (same status format,
 1. **String channels:** every `String` channel is checked. If the source delivers a numeric value representing a fixed state set, a `Number` channel with an option mapping (numeric value → label) must be used instead of a raw number or string.
 1. **Channel semantics:** each channel is a value (measurement, state, command) and not a static device property. Static data (serial number, firmware version, model, hardware revision) must be a thing property, not a channel.
 1. **Semantic tags:** for each channel, a fitting semantic tag exists in the model (Point tag such as `Measurement`/`Status`/`Control`/`Setpoint` plus Property tag such as `Temperature`/`Power`) and is set in `thing-types.xml`; report channels where a suitable tag exists but is missing.
+1. **Requested and evidenced changes** (global rule in `CLAUDE.md`): every change in the diff was requested (by the user, the spec or a review comment), and every tolerance, retry, fallback or defensive handling it adds on its own initiative is backed by evidence named in the commit message, PR description or change proposal. Report unrequested changes and changes without evidence as ⚠️ with the suggestion to remove them or to ask the user.
 
 ## Output Format
 
