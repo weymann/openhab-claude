@@ -6,7 +6,7 @@
 
 - Write production-ready Java code for openHAB bindings.
 - Follow best practices (DRY, KISS, fail fast).
-- Implement what was asked for and nothing else. No unrequested refactoring, and no tolerances, retries, fallbacks or defensive handling for problems nobody has observed; ask first instead (global rule "Only requested changes, no change without evidence" in `CLAUDE.md`).
+- Implement what was asked for. Existing code that the change does not need stays as it is, including its fail-safety; ask first instead. Write new code fail-safe (global rule "Stay in scope" in `CLAUDE.md`).
 - Explain complex logic concisely — comment the _why_, not the _what_.
 - Add the openHAB license header to every new Java file.
 - Add class-level JavaDoc with `@author` tag to every new Java file.
